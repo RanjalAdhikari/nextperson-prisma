@@ -1,8 +1,9 @@
 //'use client'
 
 import React from 'react';
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button, FilledTextFieldProps, OutlinedTextFieldProps, StandardTextFieldProps, TextFieldVariants, TextFieldProps } from '@mui/material';
 import { Person } from '../lib/person';
+import { Input, TextFieldProps as MuiTextFieldProps } from '@mui/material';
 
 interface PersonDialogProps {
   open: boolean;
@@ -37,6 +38,15 @@ const PersonDialog: React.FC<PersonDialogProps> = ({ open, handleClose, currentP
         fullWidth
         value={currentPerson?.phone || ''}
         onChange={e => setCurrentPerson(prev => ({ ...prev!, phone: e.target.value }))}
+      />
+        <TextField
+        margin="dense"
+        label="Date of Birth"
+        fullWidth
+        type="date"
+        value={currentPerson?.dob || ''} // Provide an empty string when dob is null
+        onChange={(e) => setCurrentPerson(prev => ({ ...prev!, dob: e.target.value }))} // Update dob as a string
+        InputProps={{ inputProps: { min: '1900-01-01', max: '2100-12-31' } }} // Optionally set min and max values
       />
     </DialogContent>
     <DialogActions>
